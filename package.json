@@ -1,0 +1,28 @@
+{
+  "name": "shiftslabs-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shiftslabs Business OS Monorepo",
+  "author": "Godknows Tochi Okereke",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "db:generate": "pnpm --filter @shiftslabs/database db:generate",
+    "db:migrate": "pnpm --filter @shiftslabs/database db:migrate",
+    "db:push": "pnpm --filter @shiftslabs/database db:push",
+    "db:seed": "pnpm --filter @shiftslabs/database db:seed",
+    "start:workers": "node tooling/scripts/run-all-workers.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "prettier": "^3.4.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  },
+  "packageManager": "pnpm@12.16.1"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "@shiftslabs/worker-scheduler",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "scripts": {
+    "start": "node dist/index.js",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@shiftslabs/config": "workspace:*",
+    "@shiftslabs/database": "workspace:*",
+    "@shiftslabs/intelligence": "workspace:*",
+    "@shiftslabs/billing": "workspace:*",
+    "@shiftslabs/observability": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "@shiftslabs/scheduling",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@shiftslabs/database": "workspace:*",
+    "@shiftslabs/permissions": "workspace:*",
+    "@shiftslabs/validation": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

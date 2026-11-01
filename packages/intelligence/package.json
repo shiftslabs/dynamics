@@ -1,0 +1,17 @@
+{
+  "name": "@shiftslabs/intelligence",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@shiftslabs/config": "workspace:*",
+    "@shiftslabs/database": "workspace:*",
+    "@shiftslabs/metering": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}
