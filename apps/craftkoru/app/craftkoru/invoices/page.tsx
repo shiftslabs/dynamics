@@ -28,7 +28,7 @@ export default async function InvoicesPage() {
           {invoices.map((inv: any) => (
             <Card key={inv.id} className="p-4 flex items-center justify-between">
               <div>
-                <p className="font-semibold text-slate-900">#{inv.number || inv.id.slice(0, 8)}</p>
+                <p className="font-semibold text-slate-900">#{inv.invoiceNumber || inv.id.slice(0, 8)}</p>
                 <p className="text-xs text-slate-500">{inv.status}</p>
               </div>
               <p className="font-bold text-slate-900">${((inv.totalCents || 0) / 100).toFixed(2)}</p>

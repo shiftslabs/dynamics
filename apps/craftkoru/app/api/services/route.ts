@@ -16,7 +16,6 @@ export async function POST(req: Request) {
     data: {
       businessId,
       name: body.name,
-      description: body.description || null,
       type: "service",
       sellingPriceCents: body.priceCents || 0,
       costPriceCents: body.costPriceCents || 0,
