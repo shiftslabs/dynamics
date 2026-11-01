@@ -24,7 +24,7 @@ export async function POST(req: Request) {
       laborCostCents: body.laborCostCents || 0,
       materialCostCents: body.materialCostCents || 0,
       additionalCostCents: body.additionalCostCents || 0,
-      notes: body.notes || null,
+      description: body.notes || null,
     },
   });
   return NextResponse.json({ data: job }, { status: 201 });

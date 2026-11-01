@@ -25,7 +25,7 @@ export async function POST(req: Request) {
       materialCostCents: body.materialCostCents || 0,
       additionalCostCents: body.additionalCostCents || 0,
       dueDate: body.dueDate ? new Date(body.dueDate) : null,
-      notes: body.notes || null,
+      description: body.notes || null,
     },
   });
   return NextResponse.json({ data: workOrder }, { status: 201 });

@@ -21,7 +21,7 @@ export async function PATCH(req: Request, { params }: { params: Promise<{ jobId:
       materialCostCents: body.materialCostCents,
       additionalCostCents: body.additionalCostCents,
       dueDate: body.dueDate ? new Date(body.dueDate) : undefined,
-      notes: body.notes,
+      description: body.notes,
     },
   });
   return NextResponse.json({ data: job });

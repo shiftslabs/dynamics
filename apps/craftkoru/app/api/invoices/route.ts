@@ -13,14 +13,18 @@ export async function POST(req: Request) {
   const business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } });
   const businessId = business?.id || "default";
   const count = await prisma.invoice.count({ where: { businessId } });
+  const totalCents = body.totalCents || 0;
   const invoice = await prisma.invoice.create({
     data: {
       businessId,
-      number: `INV-${String(count + 1).padStart(5, "0")}`,
-      totalCents: body.totalCents || 0,
+      invoiceNumber: `INV-${String(count + 1).padStart(5, "0")}`,
+      totalCents,
+      subtotalCents: body.subtotalCents || totalCents,
+      taxCents: body.taxCents || 0,
       paidAmountCents: 0,
       status: "draft",
       customerId: body.customerId || null,
+      dueDate: body.dueDate ? new Date(body.dueDate) : new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
     },
   });
   return NextResponse.json({ data: invoice }, { status: 201 });

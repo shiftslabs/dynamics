@@ -19,8 +19,6 @@ export async function POST(req: Request) {
       sku: body.sku || null,
       costPriceCents: body.costPriceCents || 0,
       sellingPriceCents: body.sellingPriceCents || 0,
-      stockQuantity: body.stockQuantity || 0,
-      unit: body.unit || "unit",
       isActive: true,
     },
   });

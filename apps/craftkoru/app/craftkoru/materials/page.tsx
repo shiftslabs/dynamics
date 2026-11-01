@@ -28,7 +28,7 @@ export default async function MaterialsPage() {
           {materials.map((m: any) => (
             <Card key={m.id} className="p-4">
               <p className="font-semibold text-slate-900">{m.name}</p>
-              <p className="text-xs text-slate-500 mt-1">Stock: {m.stockQuantity ?? 0}</p>
+              <p className="text-xs text-slate-500 mt-1">Type: {m.type}</p>
             </Card>
           ))}
         </div>
