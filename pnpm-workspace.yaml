@@ -3,3 +3,9 @@ packages:
   - "packages/*"
   - "workers/*"
   - "tooling/*"
+
+onlyBuiltDependencies:
+  - "@prisma/client"
+  - "@prisma/engines"
+  - "esbuild"
+  - "prisma"
