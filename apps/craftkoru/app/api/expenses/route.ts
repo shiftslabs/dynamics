@@ -18,7 +18,7 @@ export async function POST(req: Request) {
       amountCents: body.amountCents || 0,
       category: body.category || "general",
       description: body.description || null,
-      incurredAt: body.incurredAt ? new Date(body.incurredAt) : new Date(),
+      date: body.date ? new Date(body.date) : new Date(),
     },
   });
   return NextResponse.json({ data: expense }, { status: 201 });
