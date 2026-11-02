@@ -5,8 +5,9 @@ import { ArrowLeft } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
-export default async function JobDetailPage({ params }: { params: { jobId: string } }) {
-  const job = await prisma.workOrder.findUnique({ where: { id: params.jobId }, include: { customer: true } }).catch(() => null);
+export default async function JobDetailPage({ params }: { params: Promise<{ jobId: string }> }) {
+  const { jobId } = await params;
+  const job = await prisma.workOrder.findUnique({ where: { id: jobId }, include: { customer: true } }).catch(() => null);
 
   if (!job) {
     return <EmptyState title="Job not found" description="This job may have been removed." />;
