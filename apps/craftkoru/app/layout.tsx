@@ -13,6 +13,8 @@ export const viewport: Viewport = {
   userScalable: false,
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({
   children,
 }: {
