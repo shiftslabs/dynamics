@@ -1,7 +1,0 @@
-const fs = require("fs");
-const p = "otherbet/shiftsposcustome/src/pages/sales/POSPage.jsx";
-let c = fs.readFileSync(p,"utf8");
-// Replace the payment button line with template literal issue
-const old = "          <div className=\"flex gap-2\" role=\"group\" aria-label=\"Payment method\">{['cash','card','mobile'].map((m) => <button key={m} type=\"button\" aria-pressed={paymentMethod === m} onClick={() => setPaymentMethod(m)} className={`min-h-10 flex-1 rounded-xl py-2.5 text-xs font-semibold capitalize transition ${paymentMethod === m ? 'bg-brand-500/10 text-brand-700 ring-1 ring-brand-500/35 dark:text-brand-300' : 'bg-black/[0.04] text-gray-600 hover:bg-black/[0.07] dark:bg-white/[0.06] dark:text-gray-300'}`}>{m === 'mobile' ? 'Mobile money' : m}</button>)}</div>";
-const neu = "          <div className=\"flex gap-2\" role=\"group\" aria-label=\"Payment method\">{[\"cash\",\"card\",\"mobile\"].map((m) => (<button key={m} type=\"button\" aria-pressed={paymentMethod === m} onClick={() => setPaymentMethod(m)} className={paymentMethod === m ? \"min-h-10 flex-1 rounded-xl py-2.5 text-xs font-semibold capitalize transition bg-brand-500/10 text-brand-700 ring-1 ring-brand-500/35 dark:text-brand-300\" : \"min-h-10 flex-1 rounded-xl py-2.5 text-xs font-semibold capitalize transition bg-black/[0.04] text-gray-600 hover:bg-black/[0.07] dark:bg-white/[0.06] dark:text-gray-300\"}>{m === \"mobile\" ? \"Mobile money\" : m}</button>))}</div>";
-if(c.includes(old)){ c=c.split(old).join(neu); fs.writeFileSync(p,c); console.log("ok"); } else { console.log("no"); }
