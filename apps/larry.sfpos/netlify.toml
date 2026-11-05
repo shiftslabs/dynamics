@@ -1,11 +1,13 @@
 [build]
-  command = "npm install && npm run build"
+  base = "apps/larry.sfpos"
+  command = "npm install --no-audit --no-fund && npm run build"
   publish = "dist"
+  ignore = "git diff --quiet   -- apps/larry.sfpos"
 
 [build.environment]
   NODE_VERSION = "20"
-  NPM_FLAGS = "--no-audit --no-fund"
   NETLIFY_USE_PNPM = "false"
+  NETLIFY_USE_YARN = "false"
 
 [[redirects]]
   from = "/*"
