@@ -14,5 +14,10 @@ export async function POST(req: Request) {
   const hash = crypto.scryptSync(password, salt, 64).toString("hex");
   const user = await prisma.user.create({ data: { id: crypto.randomUUID(), email, name } });
   await prisma.credential.create({ data: { id: crypto.randomUUID(), userId: user.id, passwordHash: `${salt}:${hash}` } });
-  return NextResponse.json({ data: { id: user.id, email: user.email, name: user.name } }, { status: 201 });
+  const slugBase = (name || email.split("@")[0]).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "business";
+  const business = await prisma.business.create({ data: { ownerId: user.id, name: name || "My Business", slug: `${slugBase}-${crypto.randomUUID().slice(0,8)}`, defaultApp: "craftkoru" } });
+  await prisma.businessMembership.create({ data: { businessId: business.id, userId: user.id, role: "owner" } });
+  await prisma.businessSettings.create({ data: { businessId: business.id } });
+  return NextResponse.json({ data: { id: user.id, email: user.email, name: user.name, businessId: business.id } }, { status: 201 });
 }
+" filePath="C:\Users\USER\OneDrive\Documents\dynamics\apps\craftkoru\app\api\auth\register\route.ts"
