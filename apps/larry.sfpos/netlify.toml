@@ -1,9 +1,11 @@
 [build]
-  command = "npm run build"
+  command = "npm install && npm run build"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+  NPM_FLAGS = "--no-audit --no-fund"
+  NETLIFY_USE_PNPM = "false"
 
 [[redirects]]
   from = "/*"
