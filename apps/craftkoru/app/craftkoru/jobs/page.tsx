@@ -6,8 +6,8 @@ import { Scissors, Plus, ArrowRight } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function JobsPage() {
-  const business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } });
-  const businessId = business?.id || "default";
+  let business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } }); if (!business) { let owner = await prisma.user.findFirst(); if (!owner) owner = await prisma.user.create({ data: { id: "system", email: "system@local", name: "System" } }); business = await prisma.business.create({ data: { ownerId: owner.id, name: "My Business", slug: "my-business-" + Date.now(), defaultApp: "craftkoru" } }); }
+  const businessId = business.id;
   const jobs = await prisma.workOrder.findMany({
     where: { businessId },
     include: { customer: true },
@@ -62,3 +62,4 @@ export default async function JobsPage() {
     </div>
   );
 }
+

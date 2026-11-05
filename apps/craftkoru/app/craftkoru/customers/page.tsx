@@ -6,8 +6,8 @@ import { Users, Search, Plus, Phone, Mail, MapPin } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function CustomersPage() {
-  const business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } });
-  const businessId = business?.id || "default";
+  let business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } }); if (!business) { let owner = await prisma.user.findFirst(); if (!owner) owner = await prisma.user.create({ data: { id: "system", email: "system@local", name: "System" } }); business = await prisma.business.create({ data: { ownerId: owner.id, name: "My Business", slug: "my-business-" + Date.now(), defaultApp: "craftkoru" } }); }
+  const businessId = business.id;
   const customers = await prisma.customer.findMany({
     where: { businessId },
     orderBy: { createdAt: "desc" },
@@ -60,3 +60,4 @@ export default async function CustomersPage() {
     </div>
   );
 }
+

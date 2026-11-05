@@ -6,8 +6,8 @@ import { TrendingUp } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function ProfitabilityPage() {
-  const business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } });
-  const businessId = business?.id || "default";
+  let business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } }); if (!business) { let owner = await prisma.user.findFirst(); if (!owner) owner = await prisma.user.create({ data: { id: "system", email: "system@local", name: "System" } }); business = await prisma.business.create({ data: { ownerId: owner.id, name: "My Business", slug: "my-business-" + Date.now(), defaultApp: "craftkoru" } }); }
+  const businessId = business.id;
   const jobs = await prisma.workOrder.findMany({ where: { businessId }, take: 100 }).catch(() => []);
 
   const revenue = jobs.reduce((a, j) => a + (j.priceChargedCents || 0), 0);
@@ -29,3 +29,4 @@ export default async function ProfitabilityPage() {
     </div>
   );
 }
+

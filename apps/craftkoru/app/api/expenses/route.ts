@@ -2,16 +2,16 @@ import { NextResponse } from "next/server";
 import { prisma } from "@shiftslabs/database";
 
 export async function GET() {
-  const business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } });
-  const businessId = business?.id || "default";
+  let business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } }); if (!business) { let owner = await prisma.user.findFirst(); if (!owner) owner = await prisma.user.create({ data: { id: "system", email: "system@local", name: "System" } }); business = await prisma.business.create({ data: { ownerId: owner.id, name: "My Business", slug: "my-business-" + Date.now(), defaultApp: "craftkoru" } }); }
+  const businessId = business.id;
   const expenses = await prisma.expense.findMany({ where: { businessId }, orderBy: { createdAt: "desc" } });
   return NextResponse.json({ data: expenses });
 }
 
 export async function POST(req: Request) {
   const body = await req.json();
-  const business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } });
-  const businessId = business?.id || "default";
+  let business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } }); if (!business) { let owner = await prisma.user.findFirst(); if (!owner) owner = await prisma.user.create({ data: { id: "system", email: "system@local", name: "System" } }); business = await prisma.business.create({ data: { ownerId: owner.id, name: "My Business", slug: "my-business-" + Date.now(), defaultApp: "craftkoru" } }); }
+  const businessId = business.id;
   const expense = await prisma.expense.create({
     data: {
       businessId,
@@ -23,3 +23,4 @@ export async function POST(req: Request) {
   });
   return NextResponse.json({ data: expense }, { status: 201 });
 }
+

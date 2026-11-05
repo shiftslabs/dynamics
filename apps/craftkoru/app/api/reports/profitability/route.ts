@@ -3,8 +3,8 @@ import { prisma } from "@shiftslabs/database";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } });
-  const businessId = business?.id || "default";
+  let business = await prisma.business.findFirst({ where: { defaultApp: "craftkoru" } }); if (!business) { let owner = await prisma.user.findFirst(); if (!owner) owner = await prisma.user.create({ data: { id: "system", email: "system@local", name: "System" } }); business = await prisma.business.create({ data: { ownerId: owner.id, name: "My Business", slug: "my-business-" + Date.now(), defaultApp: "craftkoru" } }); }
+  const businessId = business.id;
 
   const from = searchParams.get("from") ? new Date(searchParams.get("from")!) : new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
   const to = searchParams.get("to") ? new Date(searchParams.get("to")!) : new Date();
@@ -30,3 +30,4 @@ export async function GET(req: Request) {
     },
   });
 }
+

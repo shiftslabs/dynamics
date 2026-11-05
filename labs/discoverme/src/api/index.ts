@@ -14,14 +14,11 @@ import { orders } from "./routes/orders";
 import { reviews } from "./routes/reviews";
 import { communities } from "./routes/communities";
 import { surveys } from "./routes/surveys";
-import { notifications } from "./routes/notifications";
-import { analytics } from "./routes/analytics";
-import { reports } from "./routes/reports";
+import { notifications, analyticsRoute as analytics, reportsRoute as reports } from "./routes/notifications";
 import { admin } from "./routes/admin";
 
 export const api = new Hono<{ Bindings: Env }>();
 api.use("*", sessionMiddleware);
-
 api.route("/auth", auth);
 api.route("/users", users);
 api.route("/", discovery);
@@ -36,6 +33,6 @@ api.route("/", reviews);
 api.route("/communities", communities);
 api.route("/", surveys);
 api.route("/", notifications);
-api.route("/analytics", analytics);
+api.route("/", analytics);
 api.route("/", reports);
 api.route("/admin", admin);
