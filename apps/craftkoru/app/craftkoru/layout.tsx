@@ -25,42 +25,48 @@ export default function CraftkoruLayout({
   ];
 
   const subnavItems = [
-    { label: "Dashboard", href: "/craftkoru/dashboard" },
-    { label: "Custom Jobs", href: "/craftkoru/jobs" },
-    { label: "Clients", href: "/craftkoru/customers" },
-    { label: "Measurements", href: "/craftkoru/measurements" },
-    { label: "Fittings", href: "/craftkoru/fittings" },
-    { label: "Appointments", href: "/craftkoru/appointments" },
-    { label: "Materials & BOM", href: "/craftkoru/materials" },
-    { label: "Invoices", href: "/craftkoru/invoices" },
-    { label: "Commissions", href: "/craftkoru/commissions" },
-    { label: "Profitability", href: "/craftkoru/reports/profitability" },
+    { label: "Dashboard", href: "/craftkoru/dashboard", icon: <LayoutDashboard size={18} /> },
+    { label: "Custom Jobs", href: "/craftkoru/jobs", icon: <Briefcase size={18} /> },
+    { label: "Clients", href: "/craftkoru/customers", icon: <Users size={18} /> },
+    { label: "Measurements", href: "/craftkoru/measurements", icon: <Ruler size={18} /> },
+    { label: "Fittings", href: "/craftkoru/fittings", icon: <Layers size={18} /> },
+    { label: "Appointments", href: "/craftkoru/appointments", icon: <Calendar size={18} /> },
+    { label: "Materials & BOM", href: "/craftkoru/materials", icon: <Layers size={18} /> },
+    { label: "Invoices", href: "/craftkoru/invoices", icon: <FileText size={18} /> },
+    { label: "Commissions", href: "/craftkoru/commissions", icon: <DollarSign size={18} /> },
+    { label: "Profitability", href: "/craftkoru/reports/profitability", icon: <DollarSign size={18} /> },
   ];
 
   return (
     <div className="flex flex-col min-h-screen">
       <AppHeader appName="Craftkoru" businessName="Personal Services Workspace" />
 
-      {/* Desktop Subnavigation */}
-      <nav className="hidden md:flex bg-white border-b border-slate-200 px-6 gap-6 overflow-x-auto text-sm font-medium text-slate-600">
-        {subnavItems.map((item, idx) => (
-          <a
-            key={idx}
-            href={item.href}
-            className="py-3 border-b-2 border-transparent hover:text-blue-600 hover:border-blue-600 transition-colors whitespace-nowrap"
-          >
-            {item.label}
-          </a>
-        ))}
-      </nav>
+      <div className="flex flex-1">
+        {/* Desktop Sidebar */}
+        <aside className="hidden md:flex flex-col w-64 shrink-0 bg-white border-r border-slate-200 min-h-[calc(100vh-64px)] sticky top-0">
+          <nav className="flex flex-col gap-1 p-3 text-sm font-medium text-slate-600">
+            {subnavItems.map((item, idx) => (
+              <a
+                key={idx}
+                href={item.href}
+                className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 hover:text-blue-600 transition-colors"
+              >
+                {item.icon}
+                <span>{item.label}</span>
+              </a>
+            ))}
+          </nav>
+        </aside>
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
-        {children}
-      </main>
+        {/* Main Content Area */}
+        <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+          {children}
+        </main>
+      </div>
 
       {/* Mobile Bottom Navigation */}
       <MobileBottomNav items={bottomNavItems} />
     </div>
   );
 }
+" filePath="C:\Users\USER\OneDrive\Documents\dynamics\apps\craftkoru\app\craftkoru\layout.tsx"
